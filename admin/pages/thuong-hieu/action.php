@@ -1,0 +1,45 @@
+<?php
+require_once '../../../model/ThuongHieuModel.php';
+$th = new ThuongHieuModel();
+
+if (isset($_GET['req'])) {
+    switch ($_GET['req']) {
+        case "add":
+            $res = 0;
+            $tenth = $_POST['tenth'];
+            $mota = $_POST['mota'] != "" ? $_POST['mota'] : 'Đang cập nhật';
+            $res += $th->ThuongHieu__Add($tenth, $mota);
+            if ($res != 0) {
+                header('location: ../../index.php?pages=thuong-hieu&msg=success');
+            } else {
+                header('location: ../../index.php?pages=thuong-hieu&msg=error');
+            }
+            break;
+
+        case "update":
+            $res = 0;
+            $math = $_POST['math'];
+            $tenth = $_POST['tenth'];
+            $mota = $_POST['mota'];
+            $res += $th->ThuongHieu__Update($math, $tenth, $mota);
+            if ($res != 0) {
+                header('location: ../../index.php?pages=thuong-hieu&msg=success');
+            } else {
+                header('location: ../../index.php?pages=thuong-hieu&msg=error');
+            }
+            break;
+
+        case "delete":
+            $res = 0;
+            $math = $_GET['math'];
+            $res += $th->ThuongHieu__Delete($math);
+            if ($res != 0) {
+                header('location: ../../index.php?pages=thuong-hieu&msg=success');
+            } else {
+                header('location: ../../index.php?pages=thuong-hieu&msg=error');
+            }
+            break;
+        default:
+            break;
+    }
+}
