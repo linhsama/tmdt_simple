@@ -1,3 +1,14 @@
+<?php
+if (isset($_SESSION['admin'])) {
+    unset($_SESSION['admin']);
+  }
+  if (isset($_SESSION['manager'])) {
+    unset($_SESSION['manager']);
+  }
+  if (isset($_SESSION['nhanvien'])) {
+    unset($_SESSION['nhanvien']);
+  }
+  ?>
 <div class="auth-container row">
     <div class="logo-wrapper col-4">
         <img src="../assets/images/login.png" alt="login" class="img-fluid">
@@ -20,8 +31,6 @@
             <div class="form-group text-center">
                 <button class="btn btn-danger w-100" type="submit">Login</button>
             </div>
-            <input type="hidden" name="url" id="url" class="form-control" value="<?= $url ?>" />
-
         </form>
     </div>
 </div>

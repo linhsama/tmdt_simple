@@ -5,7 +5,7 @@ require_once '../model/AnhSpModel.php';
 $sp = new SanPhamModel();
 $th = new ThuongHieuModel();
 $anhSp = new AnhSpModel();
-$sanPham__Get_All = $sp->SanPham__Get_All();
+$sanPham__Get_All = $sp->SanPham__Get_All(-1);
 ?>
 
 <div id="main-container">
@@ -49,17 +49,17 @@ $sanPham__Get_All = $sp->SanPham__Get_All();
                                 <td class="text-center font-weight-bold">
                                     <button type="button" class="btn btn-primary btn-update"
                                         onclick="return update_anhsp_obj('<?= $item->masp ?>')">
-                                        <i class="fa fa-edit" aria-hidden="true"></i> Sửa ảnh
+                                        <i class="bx bx-photo-album" aria-hidden="true"></i>
                                     </button>
                                     <button type="button" class="btn btn-warning btn-update"
                                         onclick="return update_obj('<?= $item->masp ?>')">
-                                        <i class="fa fa-edit" aria-hidden="true"></i> Sửa
+                                        <i class="bx bx-edit" aria-hidden="true"></i>
                                     </button>
                                     <?php if (isset($_SESSION['admin'])) : ?>
-                                    <button type="button" class="btn btn-danger btn-delete"
+                                    <!-- <button type="button" class="btn btn-danger btn-delete"
                                         onclick="return delete_obj('<?= $item->masp ?>')">
-                                        <i class="fa fa-trash" aria-hidden="true"></i> Xóa
-                                    </button>
+                                        <i class="bx bx-trash" aria-hidden="true"></i> Xóa
+                                    </button> -->
                                     <?php endif ?>
                                 </td>
                             </tr>
@@ -120,4 +120,5 @@ function delete_obj(masp) {
 window.addEventListener('load', function() {
     document.getElementById('dynamicTitle').innerText = "ADMIN | Quản lý sản phẩm";
 })
+
 </script>

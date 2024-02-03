@@ -68,4 +68,12 @@ class TrangThaiModel extends Database
         $obj->execute(array($matt));
         return $obj->fetch();
     }
+
+    public function TrangThai__Get_By_Id_DH($madon)
+    {
+        $obj = $this->connect->prepare("SELECT * FROM trangthai WHERE matt NOT IN (SELECT matt FROM chitiettrangthai WHERE madon = ?)");
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute(array($madon));
+        return $obj->fetchAll();
+    }
 }

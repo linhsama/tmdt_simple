@@ -1,4 +1,10 @@
 <?php
+if (!isset($_SESSION['admin'])) {
+    $msg = "Bạn không có quyền truy cập trang này!";
+    header("location: ../auth/index.php?pages=trang-loi&error=$msg");
+    exit();
+}
+
 require_once '../model/TrangThaiModel.php';
 $tt = new TrangThaiModel();
 $trangThai__Get_All = $tt->TrangThai__Get_All();
@@ -39,12 +45,12 @@ $trangThai__Get_All = $tt->TrangThai__Get_All();
                                     <td><?= $item->mota ?></td>
                                     <td class="text-center font-weight-bold">
                                         <button type="button" class="btn btn-warning btn-update" onclick="return update_obj('<?= $item->matt ?>')">
-                                            <i class="fa fa-edit" aria-hidden="true"></i> Sửa
+                                            <i class="bx bx-edit" aria-hidden="true"></i> Sửa
                                         </button>
                                         <?php if (isset($_SESSION['admin'])) : ?>
-                                            <button type="button" class="btn btn-danger btn-delete" onclick="return delete_obj('<?= $item->matt ?>')">
-                                                <i class="fa fa-trash" aria-hidden="true"></i> Xóa
-                                            </button>
+                                            <!-- <button type="button" class="btn btn-danger btn-delete" onclick="return delete_obj('<?= $item->matt ?>')">
+                                                <i class="bx bx-trash" aria-hidden="true"></i> Xóa
+                                            </button> -->
                                         <?php endif ?>
                                     </td>
                                 </tr>

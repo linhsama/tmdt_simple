@@ -7,8 +7,9 @@ if (isset($_GET['req'])) {
         case "add":
             $res = 0;
             $tenloai = $_POST['tenloai'];
+            $trangthai = $_POST['trangthai'];
             $mota = $_POST['mota'] != "" ? $_POST['mota'] : 'Đang cập nhật';
-            $res += $loaisp->LoaiSp__Add($tenloai, $mota);
+            $res += $loaisp->LoaiSp__Add($tenloai, $mota, $trangthai);
             if ($res != 0) {
                 header('location: ../../index.php?pages=loai-sp&msg=success');
             } else {
@@ -21,7 +22,8 @@ if (isset($_GET['req'])) {
             $maloai = $_POST['maloai'];
             $tenloai = $_POST['tenloai'];
             $mota = $_POST['mota'];
-            $res += $loaisp->LoaiSp__Update($maloai, $tenloai, $mota);
+            $trangthai = $_POST['trangthai'];
+            $res += $loaisp->LoaiSp__Update($maloai, $tenloai, $mota, $trangthai);
             if ($res != 0) {
                 header('location: ../../index.php?pages=loai-sp&msg=success');
             } else {

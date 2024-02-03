@@ -52,6 +52,7 @@ class ChiTietTrangThaiModel extends Database
         $obj->execute(array($madon, $matt, $manv, $ngaytao, $machitiet));
         return $obj->rowCount();
     }
+    
     public function ChiTietTrangThai__Delete($machitiet)
     {
         $obj = $this->connect->prepare("DELETE FROM chitiettrangthai WHERE machitiet = ?");
@@ -92,4 +93,15 @@ class ChiTietTrangThaiModel extends Database
         return $obj->fetchAll();
     }
 
+    public function ChiTietTrangThai__Check($madon, $matt)
+    {
+        $obj = $this->connect->prepare("SELECT * FROM chitiettrangthai WHERE madon = ? AND matt=?");
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute(array($madon, $matt));
+        if($obj->rowCount()>0){
+            return $obj->fetch();
+        }else{
+            return false;
+        }
+    }
 }

@@ -32,24 +32,29 @@ include_once($des);
 class LoaiSpModel extends Database
 {
 
-    public function LoaiSp__Get_All()
+    public function LoaiSp__Get_All($trangthai = null)
     {
-        $obj = $this->connect->prepare("SELECT * FROM loaisp");
+        if($trangthai == -1){
+            $obj = $this->connect->prepare("SELECT * FROM loaisp");
+        }else{
+            $obj = $this->connect->prepare("SELECT * FROM loaisp WHERE trangthai=1");
+        }
         $obj->setFetchMode(PDO::FETCH_OBJ);
         $obj->execute();
         return $obj->fetchAll();
     }
-    public function LoaiSp__Add($tenloai, $mota)
+    
+    public function LoaiSp__Add($tenloai, $mota, $trangthai)
     {
-        $obj = $this->connect->prepare("INSERT INTO loaisp(tenloai, mota) VALUES (?,?)");
-        $obj->execute(array($tenloai, $mota));
+        $obj = $this->connect->prepare("INSERT INTO loaisp(tenloai, mota,trangthai) VALUES (?,?,?)");
+        $obj->execute(array($tenloai, $mota, $trangthai));
         return $obj->rowCount();
     }
 
-    public function LoaiSp__Update($maloai, $tenloai, $mota)
+    public function LoaiSp__Update($maloai, $tenloai, $mota, $trangthai)
     {
-        $obj = $this->connect->prepare("UPDATE loaisp SET tenloai=?, mota=? WHERE maloai=?");
-        $obj->execute(array($tenloai, $mota, $maloai));
+        $obj = $this->connect->prepare("UPDATE loaisp SET tenloai=?, mota=?, trangthai=? WHERE maloai=?");
+        $obj->execute(array($tenloai, $mota, $trangthai, $maloai));
         return $obj->rowCount();
     }
     public function LoaiSp__Delete($maloai)

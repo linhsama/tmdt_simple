@@ -17,6 +17,13 @@ $loaisp__Get_By_Id = $loaisp->LoaiSp__Get_By_Id($maloai);
             <label for="mota" class="form-label">Mô tả</label>
             <textarea class="form-control" id="mota" name="mota" required ><?= $loaisp__Get_By_Id->mota ?></textarea>
         </div>
+        <div class="col">
+                <label for="trangthai" class="form-label">Trạng thái</label>
+                <select class="form-select " aria-label=".trangthai" id="trangthai" name="trangthai">
+                    <option value="1" <?= $loaisp__Get_By_Id->trangthai == 1 ? "selected" : "" ?>>Hiển thị</option>
+                    <option value="0" <?= $loaisp__Get_By_Id->trangthai == 0 ? "selected" : "" ?>>Tạm ẩn</option>
+                </select>
+            </div>
         <br />
         <div class="col text-center">
             <button type="submit" class="btn btn-danger">Cập nhật</button>

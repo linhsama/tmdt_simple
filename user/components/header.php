@@ -1,8 +1,12 @@
 <?php
 require_once "../model/LoaiSpModel.php";
 require_once "../model/ThuongHieuModel.php";
+require_once "../model/ChiTietGioHangModel.php";
+require_once "../model/GioHangModel.php";
 $loaisp = new LoaiSpModel();
 $th = new ThuongHieuModel();
+$ctgh = new ChiTietGioHangModel();
+$gh = new GioHangModel();
 // Lấy danh sách thể loại
 $loaiSp__Get_All = $loaisp->LoaiSp__Get_All();
 $thuongHieu__Get_All = $th->ThuongHieu__Get_All();
@@ -49,9 +53,12 @@ $thuongHieu__Get_All = $th->ThuongHieu__Get_All();
                         </div>
                     </ul>
                 </div>
-                <!-- Sản phẩm hot -->
-                <div class="navbar-item"><a href="index.php?pages=san-pham-hot"><i class='bx bxs-hot bx-burst' style='color:#ff0004'></i>Sản phẩm hot</a></div>
+                <!--  -->
+                <?php if (isset($_SESSION['user'])) : ?>
 
+                    <div class="navbar-item"><a href="index.php?pages=don-hang"><i class='bx bxs-hot bx-burst' style='color:#ff0004'></i>Đơn của bạn</a></div>
+
+                <?php endif ?>
                 <!-- Nút đóng menu -->
                 <div class="navbar-close">
                     <i class="bx bx-x"></i>
@@ -61,11 +68,27 @@ $thuongHieu__Get_All = $th->ThuongHieu__Get_All();
         <!-- Phần bên phải thanh điều hướng -->
 
         <div class="navbar-display-user-action">
-            <div class="navbar-display-cart">
-                <i class='bx bxs-cart'>
-                    <span id="cart-item">0</span>
-                </i>
-            </div>
+            <?php if (isset($_SESSION['user'])) : ?>
+                <div class="navbar-display-cart" onclick="return(location.href='./index.php?pages=gio-hang')">
+                    <i class='bx bxs-cart'>
+                        <?php
+                        $res = 0;
+                        if (isset($_SESSION['user'])) {
+                            $magh = isset($gh->GioHang__Get_By_Id_Kh($_SESSION['user']->makh)->magh) ? $gh->GioHang__Get_By_Id_Kh($_SESSION['user']->makh)->magh : 0;
+                            $res = count($ctgh->ChiTietGioHang__Get_By_Id_GH($magh));
+                        }
+                        ?>
+                        <span id="cart-item"><?= ($res) ?></span>
+                    </i>
+                </div>
+
+                <?php else : ?>
+                <div class="navbar-display-cart" onclick="return checkLogin()">
+                    <i class='bx bxs-cart'>
+                        <span id="cart-item">0</span>
+                    </i>
+                </div>
+            <?php endif ?>
 
             <?php if (isset($_SESSION['user'])) : ?>
                 <!-- display-user người dùng đã đăng nhập -->
@@ -75,9 +98,9 @@ $thuongHieu__Get_All = $th->ThuongHieu__Get_All();
                 <!-- Menu hành động của người dùng -->
                 <div class="navbar-display-action hidden">
                     <a href="#">
-                        <li><b><i class='bx bx-user-check'></i><?= $_SESSION['user']->ten_hien_thi ?></b></li>
+                        <li><b><i class='bx bx-user-check'></i><?= $_SESSION['user']->tenkh ?></b></li>
                     </a>
-                    <a href="index.php?pages=san-phan-da-xem">
+                    <!-- <a href="index.php?pages=san-phan-da-xem">
                         <li> <i class='bx bx-book-reader'></i> Sản phẩm đã xem</li>
                     </a>
                     <a href="index.php?pages=san-phan-da-thich">
@@ -89,7 +112,7 @@ $thuongHieu__Get_All = $th->ThuongHieu__Get_All();
                     <hr>
                     <a href="../auth/pages/chinh-sua.php">
                         <li> <i class='bx bx-cog'></i> Chỉnh sửa</li>
-                    </a>
+                    </a> -->
                     <hr>
                     <a href="../auth/pages/action.php?req=dang-xuat">
                         <li><i class='bx bx-log-out'></i> Đăng xuất</li>

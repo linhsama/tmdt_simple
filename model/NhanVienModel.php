@@ -32,9 +32,14 @@ include_once($des);
 class NhanVienModel extends Database
 {
 
-    public function NhanVien__Get_All()
+    public function NhanVien__Get_All($trangthai = null)
     {
-        $obj = $this->connect->prepare("SELECT * FROM nhanvien");
+        if($trangthai != -1){
+            $obj = $this->connect->prepare("SELECT * FROM nhanvien AND phanquyen != 0");
+
+        }else{
+            $obj = $this->connect->prepare("SELECT * FROM nhanvien WHERE trangthai=1 AND phanquyen != 0");
+        }
         $obj->setFetchMode(PDO::FETCH_OBJ);
         $obj->execute();
         return $obj->fetchAll();

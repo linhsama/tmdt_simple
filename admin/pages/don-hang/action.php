@@ -1,42 +1,22 @@
 <?php
-require_once '../../../model/LoaiSpModel.php';
-$loaisp = new LoaiSpModel();
+session_start();
+require_once '../../../model/ChiTietTrangThaiModel.php';
+$cttt = new ChiTietTrangThaiModel();
 
 if (isset($_GET['req'])) {
     switch ($_GET['req']) {
-        case "add":
-            $res = 0;
-            $tenloai = $_POST['tenloai'];
-            $mota = $_POST['mota'] != "" ? $_POST['mota'] : 'Đang cập nhật';
-            $res += $loaisp->LoaiSp__Add($tenloai, $mota);
-            if ($res != 0) {
-                header('location: ../../index.php?pages=loai-sp&msg=success');
-            } else {
-                header('location: ../../index.php?pages=loai-sp&msg=error');
-            }
-            break;
 
         case "update":
             $res = 0;
-            $maloai = $_POST['maloai'];
-            $tenloai = $_POST['tenloai'];
-            $mota = $_POST['mota'];
-            $res += $loaisp->LoaiSp__Update($maloai, $tenloai, $mota);
+            $madon = $_POST['madon'];
+            $matt = $_POST['matt'];
+            $manv = isset($_SESSION['admin']->manv) ? $_SESSION['admin']->manv : (isset($_SESSION['nhanvien']->manv) ? $_SESSION['nhanvien']->manv : $_SESSION['manager']->manv);
+            $ngaytao = date('Y-m-d H:i:s');
+            $res += $cttt->ChiTietTrangThai__Add($madon, $matt, $manv, $ngaytao);
             if ($res != 0) {
-                header('location: ../../index.php?pages=loai-sp&msg=success');
+                header('location: ../../index.php?pages=don-hang&msg=success');
             } else {
-                header('location: ../../index.php?pages=loai-sp&msg=error');
-            }
-            break;
-
-        case "delete":
-            $res = 0;
-            $maloai = $_GET['maloai'];
-            $res += $loaisp->LoaiSp__Delete($maloai);
-            if ($res != 0) {
-                header('location: ../../index.php?pages=loai-sp&msg=success');
-            } else {
-                header('location: ../../index.php?pages=loai-sp&msg=error');
+                header('location: ../../index.php?pages=don-hang&msg=error');
             }
             break;
         default:

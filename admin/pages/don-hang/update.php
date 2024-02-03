@@ -17,7 +17,7 @@ $ctdh = new ChiTietDonHangModel();
 $madon = $_POST['madon'];
 $chiTietDonHang__Get_By_Id_DH = $ctdh->ChiTietDonHang__Get_By_Id_DH($madon);
 $chiTietTrangThai__Get_By_Id_DH = $cttt->ChiTietTrangThai__Get_By_Id_DH($madon);
-$trangThai__Get_All = $tt->TrangThai__Get_All();
+$trangThai__Get_BY_Id_DH = $tt->TrangThai__Get_By_Id_DH($madon);
 ?>
 
 <div class="main-update">
@@ -80,15 +80,15 @@ $trangThai__Get_All = $tt->TrangThai__Get_All();
         </table>
     </div>
     <form class="form-group" action="pages/don-hang/action.php?req=update" method="post">
+    <input type="hidden" value="<?= $item->madon ?>" name="madon" required >
         <div class="col">
-            <label>Trạng thái hiện tại:</label>
-            <?php foreach ($trangThai__Get_All as $item) : ?>
+            <label>Cập nhật tình trạng đơn:</label>
+            <?php foreach ($trangThai__Get_BY_Id_DH as $item) : ?>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input checkbox" type="radio" id="matt<?= $item->matt ?>" value="<?= $item->matt ?>" name="matt" required <?=$cttt->ChiTietTrangThai__Get_Last_By_DH($madon)->matt == $item->matt ? 'checked' : ''?>>
+                    <input class="form-check-input checkbox" type="radio" id="matt<?= $item->matt ?>" value="<?= $item->matt ?>" name="matt" required <?=(isset($cttt->ChiTietTrangThai__Get_Last_By_DH($madon)->matt) ? $cttt->ChiTietTrangThai__Get_Last_By_DH($madon)->matt : "") == $item->matt ? 'checked' : ''?>>
                     <label class="form-check-label" for="matt<?= $item->matt ?>"><?= $item->tentt ?></label>
                 </div>
             <?php endforeach; ?>
-        </div>
         </div>
         <br />
         <div class="col text-center">

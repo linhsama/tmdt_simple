@@ -3,17 +3,49 @@ session_start();
 require_once '../../model/KhachHangModel.php';
 require_once '../../model/NhanVienModel.php';
 require_once '../../model/CommonModel.php';
-$khachHang = new KhachHangModel();
+$kh = new KhachHangModel();
 $nhanVien = new NhanVienModel();
 $cm = new CommonModel();
 
 if (isset($_GET['req'])) {
     switch ($_GET['req']) {
-        case "dang-ky":
-           
+        case "dang-nhap":
+            $url = $_POST['url'];
+            $email = $_POST['email'];
+            // $password = $cm->MaHoaMatKhau(trim($_POST['password']));
+            $password = (trim($_POST['password']));
+            $res = $kh->KhachHang__Dang_Nhap($email, $password);
+            if ($res == false) {
+                header('location: ../index.php?pages=dang-nhap&msg=warning');
+            } else {
+                $_SESSION['user'] = $res;
+                header('location:' . $url);
+            }
+            break;
 
-        case "chinh-sua":
-           
+
+        case "dang-ky":
+
+            $res = 0;
+            $tenkh = $_POST['tenkh'];
+            $gioitinh = $_POST['gioitinh'];
+            $ngaysinh = $_POST['ngaysinh'];
+            $sodienthoai = $_POST['sodienthoai'];
+            $diachi = $_POST['diachi'];
+            $email = $_POST['email'];
+            $password = trim($_POST['password']);
+            $trangthai = 1;
+            if ($kh->KhachHang__Check_Email($email)) {
+                $res += $kh->KhachHang__Add($tenkh, $gioitinh, $ngaysinh, $sodienthoai, $diachi, $email, $password, $trangthai);
+            }
+
+            if ($res != false) {
+                header('location: ../index.php?pages=dang-nhap');
+            } else {
+                header('location: ../index.php?pages=dang-ky&msg=error');
+            }
+            break;
+
 
         case "dang-nhap-admin":
             $email = $_POST['email'];
@@ -26,14 +58,12 @@ if (isset($_GET['req'])) {
                 if ($res->phanquyen == 0) {
                     $_SESSION['admin'] = $res;
                     header('location: ../../admin/');
-                }
-                elseif ($res->phanquyen == 1) {
+                } elseif ($res->phanquyen == 1) {
                     $_SESSION['manager'] = $res;
                     header('location: ../../admin/');
-                }
-                else{
-                    $_SESSION['user'] = $res;
-                    header('location:'. $url);
+                } elseif ($res->phanquyen == 2) {
+                    $_SESSION['nhanvien'] = $res;
+                    header('location: ../../admin/');
                 }
             }
             break;
@@ -48,7 +78,7 @@ if (isset($_GET['req'])) {
             if (isset($_SESSION['user'])) {
                 unset($_SESSION['user']);
             }
-            header('location:'.$_SERVER["HTTP_REFERER"]);
+            header('location:' . $_SERVER["HTTP_REFERER"]);
             break;
         default:
             break;

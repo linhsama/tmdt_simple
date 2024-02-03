@@ -7,50 +7,29 @@ if (isset($_GET['pages']) && !isset($_GET['req'])) {
         case "chi-tiet":
             require_once "pages/chi-tiet/index.php";
             break;
-
-
-        case "nhom-truyen":
-            require_once "pages/nhom-truyen/index.php";
+        case "gio-hang":
+            require_once "pages/gio-hang/index.php";
             break;
-        case "truyen-top":
-            require_once "pages/truyen-top/index.php";
+        case "don-hang":
+            require_once "pages/don-hang/index.php";
             break;
-        case "truyen-moi":
-            require_once "pages/truyen-moi/index.php";
+        case "tim-kiem":
+            require_once "pages/tim-kiem/index.php";
             break;
-        case "truyen-ngau-nhien":
-            require_once "pages/truyen-ngau-nhien/index.php";
+        case "thuong-hieu":
+            require_once "pages/thuong-hieu/index.php";
             break;
-        case "truyen-hot":
-            require_once "pages/truyen-hot/index.php";
+        case "loai-sp":
+            require_once "pages/loai-sp/index.php";
             break;
-        case "truyen-the-loai":
-            require_once "pages/truyen-the-loai/index.php";
-            break;
-        case "truyen-tim-kiem":
-            require_once "pages/truyen-tim-kiem/index.php";
-            break;
-     
-        case "truyen-xem":
-            require_once "pages/truyen-xem/index.php";
-            break;
-
-        case "truyen-da-xem":
-            require_once "pages/truyen-da-xem/index.php";
-            break;
-
-        case "truyen-da-thich":
-            require_once "pages/truyen-da-thich/index.php";
-            break;
-
-        case "truyen-theo-doi":
-            require_once "pages/truyen-theo-doi/index.php";
+        case "danh-muc":
+            require_once "pages/danh-muc/index.php";
             break;
         case "trang-loi":
             require_once "pages/trang-loi/index.php";
             break;
         default:
-            echo "<script>location.href='index.php?pages=trang-loi'</script>";
+            // echo "<script>location.href='index.php?pages=trang-loi'</script>";
             break;
     }
 } else {

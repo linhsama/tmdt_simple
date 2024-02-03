@@ -242,4 +242,5 @@ $loaiSp__Get_All = $loaiSp->loaiSp__Get_All();
         // Hiển thị ảnh preview cho tất cả các file được chọn
         displayImagePreview(files);
     });
+    
 </script>

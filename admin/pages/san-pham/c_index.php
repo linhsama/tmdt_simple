@@ -46,11 +46,11 @@ $anhSp__Get_By_Id_Sp_Not_First = $anhSp->AnhSp__Get_By_Id_Sp_Not_First($masp);
                                 <td><img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh ?>" alt="" class="img-fluid" width="100"></td>
                                 <td class="text-center font-weight-bold">
                                     <button type="button" class="btn btn-warning btn-update" onclick="return update_obj('<?= $anhSp__Get_By_Id_Sp_First->maanh ?>')">
-                                        <i class="fa fa-edit" aria-hidden="true"></i> Sửa
+                                        <i class="bx bx-edit" aria-hidden="true"></i> Sửa
                                     </button>
                                     <?php if (isset($_SESSION['admin'])) : ?>
                                         <button type="button" class="btn btn-danger btn-delete" onclick="return delete_obj('<?= $anhSp__Get_By_Id_Sp_First->maanh ?>')">
-                                            <i class="fa fa-trash" aria-hidden="true"></i> Xóa
+                                            <i class="bx bx-trash" aria-hidden="true"></i> Xóa
                                         </button>
                                     <?php endif ?>
                                 </td>
@@ -63,11 +63,11 @@ $anhSp__Get_By_Id_Sp_Not_First = $anhSp->AnhSp__Get_By_Id_Sp_Not_First($masp);
                                     <td><img src="../assets/<?= $item->hinhanh ?>" alt="<?= $item->maanh ?>" class="img-fluid" width="100"></td>
                                     <td class="text-center font-weight-bold">
                                         <button type="button" class="btn btn-warning btn-update" onclick="return update_obj('<?= $item->maanh ?>')">
-                                            <i class="fa fa-edit" aria-hidden="true"></i> Sửa
+                                            <i class="bx bx-edit" aria-hidden="true"></i> Sửa
                                         </button>
                                         <?php if (isset($_SESSION['admin'])) : ?>
                                             <button type="button" class="btn btn-danger btn-delete" onclick="return delete_obj('<?= $item->maanh ?>')">
-                                                <i class="fa fa-trash" aria-hidden="true"></i> Xóa
+                                                <i class="bx bx-trash" aria-hidden="true"></i> Xóa
                                             </button>
                                         <?php endif ?>
                                     </td>

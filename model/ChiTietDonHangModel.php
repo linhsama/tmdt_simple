@@ -62,6 +62,12 @@ class ChiTietDonHangModel extends Database
         $deleteStatement->execute(array($mactdh));
         return $deleteStatement->rowCount();
     }
+    public function ChiTietDonHang__Delete_By_Id_Dh($madon)
+    {
+        $deleteStatement = $this->connect->prepare("DELETE FROM chitietdonhang WHERE madon=?");
+        $deleteStatement->execute(array($madon));
+        return $deleteStatement->rowCount();
+    }
 
 
     public function ChiTietDonHang__Get_By_Id($mactdh)
@@ -96,7 +102,7 @@ class ChiTietDonHangModel extends Database
 
     public function ChiThietDonHang__Doanh_Thu_Chart($startDate, $endDate)
     {
-        $obj = $this->connect->prepare("SELECT DATE(donhang.ngaydat) as ngaydat, SUM(soluong*dongia) as sum_doanhthu FROM chitietdonhang INNER JOIN donhang ON chitietdonhang.madon = donhang.madon WHERE ngaydat >= (?) AND ngaydat <= (?) GROUP BY chitietdonhang.madon ORDER BY chitietdonhang.madon");
+        $obj = $this->connect->prepare("SELECT DATE(donhang.ngaythem) as ngaythem, tongdh AS sum_doanhthu FROM donhang WHERE ngaythem >= (?) AND ngaythem <= (?) GROUP BY madon ORDER BY madon");
         $obj->setFetchMode(PDO::FETCH_OBJ);
         $obj->execute(array(date('Y-m-d 00:00:01', strtotime($startDate)), date('Y-m-d 23:59:59', strtotime($endDate))));
         return $obj->fetchAll();

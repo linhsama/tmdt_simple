@@ -14,6 +14,7 @@ $masp = $_GET['masp'];
 $sp__Get_By_Id = $sp->SanPham__Get_By_Id($masp);
 $sp__Get_Top_Sale = $sp->SanPham__Get_Top_Sale();
 $sp__Get_Top_Same = $sp->SanPham__Get_Top_Same($sp__Get_By_Id->math,  $masp);
+$anhSp__Get_By_Id_Sp_Not_First = $anhSp->AnhSp__Get_By_Id_Sp_Not_First($sp__Get_By_Id->masp);
 ?>
 <main class="main">
     <div class="main-container">
@@ -23,12 +24,20 @@ $sp__Get_Top_Same = $sp->SanPham__Get_Top_Same($sp__Get_By_Id->math,  $masp);
                 </a>
             </div>
             <div class="manga-container__chitiet__left">
-                <a href="#" onclick="return false">
-                    <div class="manga-thumbnail">
-                        <img src="../assets/<?= $anhSp->AnhSp__Get_By_Id_Sp_First($sp__Get_By_Id->masp)->hinhanh ?>">
-                        <span class="manga-note background-2"><?= $cm->getTimeAgo($sp__Get_By_Id->ngaythem); ?> <i class="bx bxs-star"></i></span>
+                <div class="slide-container">
+                    <div id="slide">
+                        <?php foreach ($anhSp__Get_By_Id_Sp_Not_First as $item) : ?>
+                            <img src="../assets/<?= $item->hinhanh ?>" class="item" alt="">
+                        <?php endforeach ?>
                     </div>
-                </a>
+                    <br>
+                    <div class="thumbnail-container">
+                        <?php foreach ($anhSp__Get_By_Id_Sp_Not_First as $key => $item) : ?>
+                            <img src="../assets/<?= $item->hinhanh ?>" class="thumbnail" data-index="<?= $key ?>" alt="" onclick="showSlide(<?= $key ?>)">
+                        <?php endforeach ?>
+                    </div>
+                </div>
+                <hr>
                 <div class="manga-sp-container__chitiet__left">
                     <div class="manga-title color-2"><?= $sp__Get_By_Id->tensp ?></div>
                     <div class="sp-container__top">
@@ -38,9 +47,15 @@ $sp__Get_Top_Same = $sp->SanPham__Get_Top_Same($sp__Get_By_Id->math,  $masp);
                         <div class="sp-item-container__chitiet__left">
                             <div class="tab-group-1">
                                 <div class="sp-thich">
+                                    <?php if(isset($_SESSION['user'])):?>
                                     <div class="btn btn-sm color-0 background-7" onclick="addCart('<?= $masp ?>')">
                                         <i class="bx bx-cart"></i> Mua ngay
                                     </div>
+                                    <?php else:?>
+                                        <div class="btn btn-sm btn-secondary" onclick="return checkLogin()">
+                                        <i class="bx bx-cart"></i> Mua ngay
+                                    </div>
+                                    <?php endif?>
                                 </div>
                             </div>
                         </div>
@@ -117,3 +132,56 @@ $sp__Get_Top_Same = $sp->SanPham__Get_Top_Same($sp__Get_By_Id->math,  $masp);
         </div>
     </div>
 </main>
+<script>
+    function addCart(masp) {
+        $.ajax({
+            type: "POST",
+            url: "./components/action.php",
+            data: {
+                action: "add",
+                masp: masp
+            },
+            success: function(response) {
+                console.log(response);
+                    $("#cart-item").text(response);
+                    Swal.fire({
+                        icon: "success",
+                        title: "Đã thêm vào giỏ",
+                        confirmButtonText: "OK",
+                    });
+            },
+        });
+    }
+    // Định nghĩa hàm showSlide trước khi sử dụng
+    function showSlide(index) {
+        let slides = document.querySelectorAll('.item');
+        slides.forEach(function(slide) {
+            slide.style.display = 'none';
+        });
+        slides[index].style.display = 'block';
+    }
+    window.addEventListener('load', function(event) {
+
+        let slideInterval;
+
+        function showSlides() {
+            let lists = document.querySelectorAll('.item');
+            document.getElementById('slide').appendChild(lists[0]);
+        }
+
+        function startSlideShow() {
+            slideInterval = setInterval(showSlides, 2000); // Change image every 2 seconds
+        }
+
+        function stopSlideShow() {
+            clearInterval(slideInterval);
+        }
+
+        startSlideShow(); // Start slideshow initially
+
+        // Stop slideshow on hover
+        let slideContainer = document.querySelector('.slide-container');
+        slideContainer.addEventListener('mouseenter', stopSlideShow);
+        slideContainer.addEventListener('mouseleave', startSlideShow);
+    });
+</script>

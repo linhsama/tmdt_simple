@@ -32,9 +32,13 @@ include_once($des);
 class KhachHangModel extends Database
 {
 
-    public function KhachHang__Get_All()
+    public function KhachHang__Get_All($trangthai = null)
     {
-        $obj = $this->connect->prepare("SELECT * FROM khachhang");
+        if($trangthai != -1){
+            $obj = $this->connect->prepare("SELECT * FROM khachhang");
+        }else{
+            $obj = $this->connect->prepare("SELECT * FROM khachhang WHERE trangthai =1");
+        }
         $obj->setFetchMode(PDO::FETCH_OBJ);
         $obj->execute();
         return $obj->fetchAll();
@@ -53,6 +57,14 @@ class KhachHangModel extends Database
         return $obj->rowCount();
     }
     
+    public function KhachHang__Update_Info($makh, $tenkh, $sodienthoai, $diachi, $email)
+    {
+        $obj = $this->connect->prepare("UPDATE khachhang SET tenkh=?, sodienthoai=?, diachi=?, email=? WHERE makh=?");
+        $obj->execute(array($tenkh, $sodienthoai, $diachi, $email, $makh));
+        return $obj->rowCount();
+    }
+    
+
     public function KhachHang__Delete($makh)
     {
         $obj = $this->connect->prepare("DELETE FROM khachhang WHERE makh = ?");
@@ -91,7 +103,7 @@ class KhachHangModel extends Database
 
     public function KhachHang__Dang_Nhap($email, $password)
     {
-        $obj = $this->connect->prepare("SELECT * FROM khachhang WHERE email =? AND password = 1");
+        $obj = $this->connect->prepare("SELECT * FROM khachhang WHERE email =? AND `password` = ?");
         $obj->setFetchMode(PDO::FETCH_OBJ);
         $obj->execute(array($email, $password));
         if ($obj->rowCount() > 0) {

@@ -39,26 +39,26 @@
                     <span class="text">Quản lý thương hiệu</span>
                 </a>
             </li>
-            <li class="<?= $_GET['pages'] == 'trang-thai' ? "active" : "" ?>">
-                <a href="index.php?pages=trang-thai">
-                    <i class='bx bx-category-alt'></i>
-                    <span class="text">Quản lý trạng thái</span>
-                </a>
-            </li>
-            <li class="<?= $_GET['pages'] == 'nhan-vien' ? "active" : "" ?>">
-                <a href="index.php?pages=nhan-vien">
-                <i class='bx bx-group'></i>
-                    <span class="text">Quản lý nhân viên</span>
-                </a>
-            </li>
+
+            <?php if (isset($_SESSION['admin']) || isset($_SESSION['manager'])) : ?>
+                <li class="<?= $_GET['pages'] == 'trang-thai' ? "active" : "" ?>">
+                    <a href="index.php?pages=trang-thai">
+                        <i class='bx bx-category-alt'></i>
+                        <span class="text">Quản lý trạng thái</span>
+                    </a>
+                </li>
+                <li class="<?= $_GET['pages'] == 'nhan-vien' ? "active" : "" ?>">
+                    <a href="index.php?pages=nhan-vien">
+                        <i class='bx bx-group'></i>
+                        <span class="text">Quản lý nhân viên</span>
+                    </a>
+                </li>
                 <li class="<?= $_GET['pages'] == 'khach-hang' ? "active" : "" ?>">
                     <a href="index.php?pages=khach-hang">
                         <i class='bx bx-group'></i>
                         <span class="text">Quản lý khách hàng</span>
                     </a>
                 </li>
-            <?php if (isset($_SESSION['admin'])) : ?>
-
             <?php endif ?>
             <li>
                 <a href="../user/">

@@ -32,24 +32,28 @@ include_once($des);
 class ThuongHieuModel extends Database
 {
 
-    public function ThuongHieu__Get_All()
+    public function ThuongHieu__Get_All($trangthai = null)
     {
-        $obj = $this->connect->prepare("SELECT * FROM thuonghieu");
+        if ($trangthai == -1) {
+            $obj = $this->connect->prepare("SELECT * FROM thuonghieu");
+        } else {
+            $obj = $this->connect->prepare("SELECT * FROM thuonghieu WHERE trangthai=1");
+        }
         $obj->setFetchMode(PDO::FETCH_OBJ);
         $obj->execute();
         return $obj->fetchAll();
     }
-    public function ThuongHieu__Add($tenth, $mota)
+    public function ThuongHieu__Add($tenth, $mota, $trangthai)
     {
-        $obj = $this->connect->prepare("INSERT INTO thuonghieu(tenth, mota) VALUES (?,?)");
+        $obj = $this->connect->prepare("INSERT INTO thuonghieu(tenth, mota, trangthai) VALUES (?,?,?)");
         $obj->execute(array($tenth, $mota));
         return $obj->rowCount();
     }
 
-    public function ThuongHieu__Update($math, $tenth, $mota)
+    public function ThuongHieu__Update($math, $tenth, $mota, $trangthai)
     {
-        $obj = $this->connect->prepare("UPDATE thuonghieu SET tenth=?, mota=? WHERE math=?");
-        $obj->execute(array($tenth, $mota, $math));
+        $obj = $this->connect->prepare("UPDATE thuonghieu SET tenth=?, mota=?, trangthai=? WHERE math=?");
+        $obj->execute(array($tenth, $mota, $trangthai, $math));
         return $obj->rowCount();
     }
     public function ThuongHieu__Delete($math)

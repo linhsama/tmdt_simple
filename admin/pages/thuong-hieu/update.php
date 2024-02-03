@@ -17,6 +17,13 @@ $thuongHieu__Get_By_Id = $th->ThuongHieu__Get_By_Id($math);
             <label for="mota" class="form-label">Mô tả</label>
             <textarea class="form-control" id="mota" name="mota" required ><?= $thuongHieu__Get_By_Id->mota ?></textarea>
         </div>
+        <div class="col">
+                <label for="trangthai" class="form-label">Trạng thái</label>
+                <select class="form-select " aria-label=".trangthai" id="trangthai" name="trangthai">
+                    <option value="1" <?= $thuongHieu__Get_By_Id->trangthai == 1 ? "selected" : "" ?>>Hiển thị</option>
+                    <option value="0" <?= $thuongHieu__Get_By_Id->trangthai == 0 ? "selected" : "" ?>>Tạm ẩn</option>
+                </select>
+            </div>
         <br />
         <div class="col text-center">
             <button type="submit" class="btn btn-danger">Cập nhật</button>

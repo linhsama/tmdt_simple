@@ -37,7 +37,7 @@ $chiTietDonHang__Doanh_Thu_Chart = $ctdh->ChiThietDonHang__Doanh_Thu_Chart($star
                 <?php foreach ($chiTietDonHang__Doanh_Thu_Chart as $item) : ?>
                     <tr>
                         <td><?= $count++ ?></td>
-                        <td><?= $item->ngaydat ?></td>
+                        <td><?= $item->ngaythem ?></td>
                         <td><?= number_format($item->sum_doanhthu) ?></td>
                     </tr>
                 <?php endforeach ?>
@@ -50,14 +50,14 @@ $chiTietDonHang__Doanh_Thu_Chart = $ctdh->ChiThietDonHang__Doanh_Thu_Chart($star
 <script>
     // Line Chart
 
-    var ngaydat = <?php echo json_encode(array_column($chiTietDonHang__Doanh_Thu_Chart, 'ngaydat')); ?>;
+    var ngaythem = <?php echo json_encode(array_column($chiTietDonHang__Doanh_Thu_Chart, 'ngaythem')); ?>;
     var sum_doanhthu = <?php echo json_encode(array_column($chiTietDonHang__Doanh_Thu_Chart, 'sum_doanhthu')); ?>;
 
     var lineChartColors = ['#FF6384', '#36A2EB', '#FFCE56', '#4CAF50', '#FF5733'];
 
     var lineChartCanvas = document.getElementById("lineChart").getContext('2d');
     var lineChartData = {
-        labels: ngaydat,
+        labels: ngaythem,
         datasets: [{
             data: sum_doanhthu,
             backgroundColor: lineChartColors,

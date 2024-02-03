@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['admin']) && !isset($_SESSION['manager'])) {
+if (!isset($_SESSION['admin']) && !isset($_SESSION['manager']) && !isset($_SESSION['nhanvien'])) {
     header("location: ../auth/index.php?pages=dang-nhap-admin");
     exit();
 }

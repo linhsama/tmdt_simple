@@ -1,11 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['admin'])) {
-  unset($_SESSION['admin']);
-}
-if (isset($_SESSION['manager'])) {
-  unset($_SESSION['manager']);
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -68,7 +63,7 @@ if (isset($_SESSION['manager'])) {
                         });
                         Toast.fire({
                             icon: 'error',
-                            title: 'Đăng ký không thành công!'
+                            title: 'Đăng ký không thành công! Tài khoản đã tồn tại'
                         });
                     </script>";
         break;

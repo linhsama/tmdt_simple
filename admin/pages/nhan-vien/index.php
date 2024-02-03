@@ -1,7 +1,7 @@
 <?php
 require_once '../model/NhanVienModel.php';
 $nv = new NhanVienModel();
-$nhanVien__Get_All = $nv->NhanVien__Get_All();
+$nhanVien__Get_All = $nv->NhanVien__Get_All(-1);
 ?>
 
 <div id="main-container">
@@ -45,12 +45,12 @@ $nhanVien__Get_All = $nv->NhanVien__Get_All();
                                     <td><?= $item->phanquyen == 1 ? '<span class="text-danger">Manager</span>' : ($item->phanquyen == 2 ? '<span class="text-primay">Nhân viên</span>' : '<span class="text-success">Khách hàng</span>')?></td>
                                     <td class="text-center font-weight-bold">
                                         <button type="button" class="btn btn-warning btn-update" onclick="return update_obj('<?= $item->manv ?>')">
-                                            <i class="fa fa-edit" aria-hidden="true"></i> Sửa
+                                            <i class="bx bx-edit" aria-hidden="true"></i> Sửa
                                         </button>
                                         <?php if (isset($_SESSION['admin'])) : ?>
-                                            <button type="button" class="btn btn-danger btn-delete" onclick="return delete_obj('<?= $item->manv ?>')">
-                                                <i class="fa fa-trash" aria-hidden="true"></i> Xóa
-                                            </button>
+                                            <!-- <button type="button" class="btn btn-danger btn-delete" onclick="return delete_obj('<?= $item->manv ?>')">
+                                                <i class="bx bx-trash" aria-hidden="true"></i> Xóa
+                                            </button> -->
                                         <?php endif ?>
                                     </td>
                                 </tr>

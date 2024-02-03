@@ -15,13 +15,11 @@ if (isset($_GET['req'])) {
             $mota = $_POST["mota"];
             $ngaythem = date("Y-m-d H:i:s");
             $trangthai = $_POST["trangthai"];
-            $luotthich = 0;
             $luotmua = 0;
-            $luotxem = 0;
             $math = $_POST["math"];
             $maloai = $_POST["maloai"];
 
-            $masp = $sp->SanPham__Add($tensp, $dongia, $mota, $ngaythem, $trangthai, $luotthich, $luotmua, $luotxem, $math, $maloai);
+            $masp = $sp->SanPham__Add($tensp, $dongia, $mota, $ngaythem, $trangthai, $luotmua, $math, $maloai);
 
             $totalRes = 0;
 
@@ -69,9 +67,7 @@ if (isset($_GET['req'])) {
             $mota = $_POST["mota"];
             $ngaythem = date("Y-m-d H:i:s");
             $trangthai = $_POST["trangthai"];
-            $luotthich = 0;
-            $luotmua = 0;
-            $luotxem = 0;
+            $luotmua = $_POST["luotmua"];
             $math = $_POST["math"];
             $maloai = $_POST["maloai"];
 

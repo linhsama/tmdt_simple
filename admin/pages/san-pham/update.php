@@ -14,10 +14,7 @@ $loaiSp__Get_All = $loaiSp->loaiSp__Get_All();
 <div class="main-update">
     <h3 class="section-title">Cập nhật sản phẩm</h3>
     <form class="form-group" action="pages/san-pham/action.php?req=update" method="post">
-    <input type="hidden" class="form-control" id="masp" name="masp" required value="<?= $sanPham__Get_By_Id->masp ?>">
-    <input type="hidden" class="form-control" id="luotthich" name="luotthich" required value="<?= $sanPham__Get_By_Id->luotthich ?>">
-    <input type="hidden" class="form-control" id="luotxem" name="luotxem" required value="<?= $sanPham__Get_By_Id->luotxem ?>">
-    <input type="hidden" class="form-control" id="luotmua" name="luotmua" required value="<?= $sanPham__Get_By_Id->luotmua ?>">
+        <input type="hidden" class="form-control" id="masp" name="masp" required value="<?= $sanPham__Get_By_Id->masp ?>">
         <div class="col">
             <label for="tensp" class="form-label">Tên sản phẩm</label>
             <input type="text" class="form-control" id="tensp" name="tensp" required value="<?= $sanPham__Get_By_Id->tensp ?>">
@@ -60,19 +57,9 @@ $loaiSp__Get_All = $loaiSp->loaiSp__Get_All();
                 </div>
             <?php endforeach; ?>
         </div>
-        <div class="row">
-            <div class="col">
-                <label for="luotthich" class="form-label">Lượt thích</label>
-                <input type="number" min="0" max="1000000000" class="form-control" id="luotthich" name="luotthich" required value="<?= $sanPham__Get_By_Id->luotthich ?>" readonly>
-            </div>
-            <div class="col">
-                <label for="luotxem" class="form-label">Lượt xem</label>
-                <input type="number" min="0" max="1000000000" class="form-control" id="luotxem" name="luotxem" required value="<?= $sanPham__Get_By_Id->luotxem ?>" readonly>
-            </div>
-            <div class="col">
-                <label for="luotmua" class="form-label">Lượt mua</label>
-                <input type="number" min="0" max="1000000000" class="form-control" id="luotmua" name="luotmua" required value="<?= $sanPham__Get_By_Id->luotmua ?>" readonly>
-            </div>
+        <div class="col">
+            <label for="luotmua" class="form-label">Lượt mua</label>
+            <input type="number" min="0" max="1000000000" class="form-control" id="luotmua" name="luotmua" required value="<?= $sanPham__Get_By_Id->luotmua ?>" readonly>
         </div>
         <br />
         <div class="col text-center">
@@ -82,5 +69,5 @@ $loaiSp__Get_All = $loaiSp->loaiSp__Get_All();
     </form>
 </div>
 <script>
-CKEDITOR.replace('mota_u');
+    CKEDITOR.replace('mota_u');
 </script>

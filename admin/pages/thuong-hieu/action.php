@@ -7,8 +7,9 @@ if (isset($_GET['req'])) {
         case "add":
             $res = 0;
             $tenth = $_POST['tenth'];
+            $trangthai = $_POST['trangthai'];
             $mota = $_POST['mota'] != "" ? $_POST['mota'] : 'Đang cập nhật';
-            $res += $th->ThuongHieu__Add($tenth, $mota);
+            $res += $th->ThuongHieu__Add($tenth, $mota, $trangthai);
             if ($res != 0) {
                 header('location: ../../index.php?pages=thuong-hieu&msg=success');
             } else {
@@ -20,8 +21,9 @@ if (isset($_GET['req'])) {
             $res = 0;
             $math = $_POST['math'];
             $tenth = $_POST['tenth'];
+            $trangthai = $_POST['trangthai'];
             $mota = $_POST['mota'];
-            $res += $th->ThuongHieu__Update($math, $tenth, $mota);
+            $res += $th->ThuongHieu__Update($math, $tenth, $mota, $trangthai);
             if ($res != 0) {
                 header('location: ../../index.php?pages=thuong-hieu&msg=success');
             } else {

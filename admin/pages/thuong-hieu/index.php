@@ -1,7 +1,7 @@
 <?php
 require_once '../model/ThuongHieuModel.php';
 $th = new ThuongHieuModel();
-$thuongHieu__Get_All = $th->ThuongHieu__Get_All();
+$thuongHieu__Get_All = $th->ThuongHieu__Get_All(-1);
 ?>
 
 <div id="main-container">
@@ -28,6 +28,7 @@ $thuongHieu__Get_All = $th->ThuongHieu__Get_All();
                                 <th>ID</th>
                                 <th>Tên thương hiệu</th>
                                 <th>Mô tả</th>
+                                <th>Trạng thái</th>
                                 <th>Thao tác</th>
                             </tr>
                         </thead>
@@ -37,14 +38,15 @@ $thuongHieu__Get_All = $th->ThuongHieu__Get_All();
                                     <td><?= $item->math ?></td>
                                     <td><?= $item->tenth ?></td>
                                     <td><?= $item->mota ?></td>
+                                    <td><?= $item->trangthai == 1 ? '<span class="text-success">Hoạt động</span>' : '<span class="text-danger">Tạm khóa</span>' ?></td>
                                     <td class="text-center font-weight-bold">
                                         <button type="button" class="btn btn-warning btn-update" onclick="return update_obj('<?= $item->math ?>')">
-                                            <i class="fa fa-edit" aria-hidden="true"></i> Sửa
+                                            <i class="bx bx-edit" aria-hidden="true"></i> Sửa
                                         </button>
                                         <?php if (isset($_SESSION['admin'])) : ?>
-                                            <button type="button" class="btn btn-danger btn-delete" onclick="return delete_obj('<?= $item->math ?>')">
-                                                <i class="fa fa-trash" aria-hidden="true"></i> Xóa
-                                            </button>
+                                            <!-- <button type="button" class="btn btn-danger btn-delete" onclick="return delete_obj('<?= $item->math ?>')">
+                                                <i class="bx bx-trash" aria-hidden="true"></i> Xóa
+                                            </button> -->
                                         <?php endif ?>
                                     </td>
                                 </tr>
